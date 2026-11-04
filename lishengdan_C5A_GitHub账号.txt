@@ -5,7 +5,7 @@ GitHub 用户名：1sd-sd
 
 | 类型 | 地址 | 说明 |
 |---|---|---|
-| Fork（C5A 指定目标） | https://github.com/1sd-sd/neoskills | 上游 neolaf2/neoskills，v0.4.2；本地已建 2 个分支并提交，**未推送** |
+| Fork（C5A 指定目标） | https://github.com/1sd-sd/neoskills | 上游 neolaf2/neoskills，v0.4.2；2 个分支已推送到 fork：`fix/frontmatter-unicode`、`docs/zh-quickstart` |
 | 个人仓库（C5 成果） | https://github.com/1sd-sd/skilllens | 技能包体检器，MIT，Public |
 
 ## 账号上已有的仓库（历史挑战）
@@ -16,4 +16,5 @@ C1 / C2 / C2A-C9 / C2G / C4 / C4A / C4B / C4C / C4D
 
 - 本机已配置 SSH key，`ssh -T git@github.com` 返回 `Hi 1sd-sd!`
 - 提交身份：`lishengdan <3434153697@qq.com>`
-- 按用户要求，本次挑战不再新建仓库、不再推送；上述两个地址仅作记录
+- 2026-11-04 追加：九个挑战的成果已推送到 `1sd-sd/C5` … `1sd-sd/C10H` 九个仓库；
+  C5A 的两个分支也已推送到 fork，**PR 需由你在浏览器打开（见《分支与提交记录》第三节）**

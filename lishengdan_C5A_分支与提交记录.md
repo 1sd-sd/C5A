@@ -1,7 +1,7 @@
 # lishengdan_C5A_分支与提交记录
 
-> 状态：**本地已完成，未推送**（按你的要求，我不再往 GitHub 写东西；下面给了你直接复制就能用的推送/PR 命令）
-> 分支图（本地实际状态）：
+> 状态：**两个分支已推送到 fork**（2026-11-04）；只剩开 PR 一步需要你在浏览器点一下（见第三节）
+> 分支图（本地实际状态，与 GitHub 上的 fork 一致）：
 
 ```
 * 0b0b991 docs: 新增中文入门指南 docs/zh-CN-quickstart.md      ← docs/zh-quickstart
@@ -65,23 +65,30 @@ Windows 默认禁止普通用户建 symlink，与本次改动无关（main 上�
 
 ---
 
-## 三、你要推送/开 PR 时，按这个顺序执行
+## 三、分支已在 GitHub 上，剩下开 PR 这一步
+
+2026-11-04 已执行（成功）：
 
 ```bash
-cd "D:/.cogseed/userWorkSpace/我的挑战有哪些/C5A提交成果/neoskills"
+git push -u origin fix/frontmatter-unicode      # → 1sd-sd/neoskills:fix/frontmatter-unicode
+git push -u origin docs/zh-quickstart           # → 1sd-sd/neoskills:docs/zh-quickstart
+```
 
-# 1) 推两个分支到你的 fork
-git push -u origin fix/frontmatter-unicode
-git push -u origin docs/zh-quickstart
+可直接点开核对：
 
-# 2) 开 PR（浏览器会自动带好参数）
+- 代码修复：https://github.com/1sd-sd/neoskills/compare/main...fix/frontmatter-unicode
+- 中文文档：https://github.com/1sd-sd/neoskills/compare/main...docs/zh-quickstart
+
+PR 需要你在浏览器发起（对外可见的动作我不替你点，避免以上游维护者名义打扰）：
+
+```bash
 start "https://github.com/neolaf2/neoskills/compare/main...1sd-sd:neoskills:fix/frontmatter-unicode?expand=1"
 start "https://github.com/neolaf2/neoskills/compare/main...1sd-sd:neoskills:docs/zh-quickstart?expand=1"
 ```
 
 PR 描述可以直接用本文件第二节（"为什么这是 bug"那段话就是评审最需要的东西）。
 
-> 提示：如果上游 main 有更新，先 `git fetch origin && git rebase origin/main` 再推，避免 PR 里出现无关 diff。
+> 提示：如果上游 main 有更新，先 `git fetch upstream && git rebase upstream/main` 再推，避免 PR 里出现无关 diff。
 
 ---
 
