@@ -1,0 +1,37 @@
+# neoskills --help
+Usage: neoskills [OPTIONS] COMMAND [ARGS]...
+
+  neoskills - Cross-Agent Skill Bank & Transfer System.
+
+Options:
+  --version  Show the version and exit.
+  --help     Show this message and exit.
+
+Commands:
+  agent      Discover and run agents.
+  config     Manage neoskills configuration.
+  create     Scaffold a new skill in the default tap.
+  doctor     Check skill system health (broken links, missing...
+  enhance    Enhance a skill using Claude.
+  info       Show detailed info for a skill.
+  init       Initialize the neoskills workspace (~/.neoskills/).
+  install    Install a skill (copy to default tap if needed, then link).
+  link       Create symlink(s) from tap skills to target.
+  list       List installed and/or linked skills.
+  migrate    Migrate from v0.2 bank structure to v0.3 taps structure.
+  ontology   Skill ontology — graph-based skill discovery, lifecycle, and...
+  plugin     Create and validate neoskills plugins.
+  push       Commit and push tap changes to GitHub.
+  schedule   Memory-enabled personal schedule agent commands.
+  search     Search for skills across all taps.
+  tap        Register a tap (clone a skill repository).
+  uninstall  Uninstall a skill (unlink, optionally remove from tap).
+  unlink     Remove symlink(s) from target.
+  untap      Remove a tap repository.
+  update     Pull latest from tap repositories (git pull).
+  upgrade    Update taps then verify/refresh symlinks.
+
+# init（实测写入真实用户目录，HOME 变量无效）
+Workspace already exists at C:\Users\L1983\.neoskills
+Checking for missing directories and files...
+Workspace is up to date. Nothing to create.

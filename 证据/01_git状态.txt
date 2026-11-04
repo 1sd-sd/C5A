@@ -1,0 +1,57 @@
+# 环境
+Python 3.13.14
+git version 2.55.0.windows.3
+
+# 克隆来源与提交
+origin	git@github.com:1sd-sd/neoskills.git (fetch)
+origin	git@github.com:1sd-sd/neoskills.git (push)
+0b0b991 docs: 新增中文入门指南 docs/zh-CN-quickstart.md
+7c4dada chore: bump to 0.4.2 — fix version string in installed package
+abb757c ci: fix CI failures — ruff format, upgrade actions to Node.js 24
+
+# 分支
+* docs/zh-quickstart
+  fix/frontmatter-unicode
+  main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+
+# 提交明细
+0b0b991 docs: 新增中文入门指南 docs/zh-CN-quickstart.md
+ docs/zh-CN-quickstart.md | 151 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 151 insertions(+)
+7c4dada chore: bump to 0.4.2 — fix version string in installed package
+ pyproject.toml            | 2 +-
+ src/neoskills/__init__.py | 2 +-
+ tests/unit/test_cli.py    | 2 +-
+ uv.lock                   | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+abb757c ci: fix CI failures — ruff format, upgrade actions to Node.js 24
+ .github/workflows/ci.yml               |  9 +++--
+ .github/workflows/release.yml          | 10 ++++--
+ src/neoskills/cli/enhance_cmd.py       |  4 ++-
+ src/neoskills/cli/init_cmd.py          |  4 +--
+ src/neoskills/cli/list_cmd.py          | 18 +++++++---
+ src/neoskills/cli/migrate_cmd.py       | 23 +++++++-----
+ src/neoskills/cli/ontology_cmd.py      | 43 +++++++++++++++-------
+ src/neoskills/cli/plugin_cmd.py        |  8 ++---
+ src/neoskills/cli/push_cmd.py          |  7 ++--
+ src/neoskills/cli/schedule_cmd.py      | 21 ++++++++---
+ src/neoskills/core/cellar.py           |  4 +--
+ src/neoskills/core/frontmatter.py      |  2 +-
+ src/neoskills/core/linker.py           | 32 +++++++++--------
+ src/neoskills/core/mode.py             |  2 +-
+ src/neoskills/core/namespace.py        |  2 +-
+ src/neoskills/core/tap.py              | 26 +++++++-------
+ src/neoskills/core/workspace.py        |  8 +++--
+ src/neoskills/ontology/composition.py  | 32 +++++++++--------
+ src/neoskills/ontology/engine.py       | 36 +++++++++----------
+ src/neoskills/ontology/export.py       | 24 ++++++++-----
+ src/neoskills/ontology/graph.py        | 35 ++++++------------
+ src/neoskills/ontology/lifecycle.py    | 12 ++-----
+ src/neoskills/ontology/loader.py       | 39 ++++++++++----------
+ src/neoskills/ontology/taxonomy.py     | 66 +++++++++++++++++-----------------
+ src/neoskills/plugin/schema.py         |  8 +++--
+ src/neoskills/runtime/claude/plugin.py | 39 +++++++++++++-------
+ src/neoskills/runtime/deps.py          |  9 +----
+ 27 files changed, 291 insertions(+), 232 deletions(-)

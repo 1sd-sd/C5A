@@ -1,0 +1,21 @@
+# 全量测试（分支 main：改动前）
+FAILED tests/unit/test_linker.py::TestCheckHealth::test_broken_symlink_detected
+FAILED tests/unit/test_linker.py::TestCheckHealth::test_mixed_health - OSErro...
+FAILED tests/unit/test_resolver.py::TestResolverCheckAll::test_check_all_with_linked_broken_dep
+14 failed, 158 passed in 6.33s
+
+# 全量测试（fix/frontmatter-unicode：改动后）
+FAILED tests/unit/test_linker.py::TestCheckHealth::test_broken_symlink_detected
+FAILED tests/unit/test_linker.py::TestCheckHealth::test_mixed_health - OSErro...
+FAILED tests/unit/test_resolver.py::TestResolverCheckAll::test_check_all_with_linked_broken_dep
+14 failed, 161 passed in 5.42s
+
+# 新增测试单独跑
+configfile: pyproject.toml
+collecting ... collected 3 items
+
+tests/unit/test_frontmatter_unicode.py::test_chinese_description_roundtrip PASSED [ 33%]
+tests/unit/test_frontmatter_unicode.py::test_ascii_only_unchanged PASSED [ 66%]
+tests/unit/test_frontmatter_unicode.py::test_nested_and_list_values_preserved PASSED [100%]
+
+============================== 3 passed in 0.21s ==============================

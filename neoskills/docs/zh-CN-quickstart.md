@@ -1,0 +1,151 @@
+# neoskills 中文入门指南
+
+> 这是一份**入门指南**，不是 README 的逐句翻译。目标：让中文用户在 15 分钟内跑通 neoskills，
+> 并理解它和"把技能文件夹拷来拷去"有什么本质区别。
+> 官方英文文档：`README.md`（跟随上游更新，本文件可能滞后于新命令）。
+
+---
+
+## 0. 一句话理解 neoskills
+
+**它是技能界的 Homebrew。**
+
+你不把技能拷进 `~/.claude/skills/`，而是：
+
+1. 技能统一放在一个 git 仓库（叫 **tap**）里，是唯一真源；
+2. 用 `neoskills install` 在这条技能和目标目录之间建一个**符号链接**；
+3. 想换版本就 `git pull`，想撤就 `unlink`，不留副本、不会漂移。
+
+一句话差别：**拷贝会分叉，链接不会。**
+
+---
+
+## 1. 安装
+
+```bash
+# 要求 Python 3.13+（这是硬要求，3.12 会在语法层报错）
+pip install neoskills
+# 或
+uv tool install neoskills
+
+neoskills --version   # 0.4.2
+```
+
+从源码：
+
+```bash
+git clone https://github.com/neolaf2/neoskills
+cd neoskills
+uv sync --dev
+uv run neoskills --help
+```
+
+---
+
+## 2. 五分钟跑通
+
+```bash
+neoskills init                       # 建 ~/.neoskills/（config.yaml + taps/ + cache/）
+neoskills tap https://github.com/<org>/<repo>   # 加一个技能源
+neoskills list                       # 看这个 tap 里有什么
+neoskills search "文档处理"           # 跨 tap 搜索
+neoskills install kstar-loop          # 装进默认 tap 并链接到 agent 目录
+neoskills doctor                      # 体检：断链、缺失依赖
+```
+
+自己写一个：
+
+```bash
+neoskills create my-skill -d "把会议录音整理成纪要" --type task
+# 生成 skills/my-skill/SKILL.md + ontology.yaml
+```
+
+> 坑：`create` 生成的 SKILL.md 只有一行 `TODO: Add skill content here.`，
+> description 只有你给的那一句话。**它不会被可靠触发**——必须自己补
+> "什么时候用 / 输入 / 步骤 / 输出"四段。见第 5 节。
+
+---
+
+## 3. 四个核心概念
+
+| 概念 | 是什么 | 类比 |
+|---|---|---|
+| **tap** | 一个 git 仓库，里面装着一批技能 | Homebrew 的 tap |
+| **cellar** | 本地工作区 `~/.neoskills/`，含 config、taps、cache | Homebrew 的 Cellar |
+| **linker** | 在 tap 技能与目标目录之间建**逐技能符号链接** | `brew link` |
+| **ontology** | 每个技能旁挂一个 `ontology.yaml`，构成属性图 | 不用数据库的轻量图 |
+
+### 部署模型（这是它最值得学的设计）
+
+```
+~/.claude/skills/kstar-loop  -->  ~/.neoskills/taps/mySkills/skills/kstar-loop
+```
+
+- 一个真源，多个 agent 同时链接
+- 改 tap 立即生效，不用重新"安装"
+- `unlink` 只删链接，不动内容
+
+### 本体层（ontology）
+
+技能不需要一上来就写满元数据，可以逐级加：
+
+| 级别 | 有什么 | 怎么到 |
+|---|---|---|
+| L0 | 只有 SKILL.md | 默认 |
+| L1 | + type / domain / tags | `ontology enrich <id>` |
+| L2 | + 边（requires / extends / composes_with…） | 手写 |
+| L3 | + 生命周期 / 版本 / 能力清单 | 长期维护 |
+
+生命周期是个状态机：
+
+```
+candidate → validated → operational → refined → deprecated → archived
+```
+
+---
+
+## 4. 命令速查（21 个）
+
+| 分组 | 命令 | 用途 |
+|---|---|---|
+| 工作区 | `init` | 建 `~/.neoskills/` |
+| 源管理 | `tap` / `untap` / `update` / `upgrade` / `push` | 加源 / 删源 / 拉更新 / 更新+重建链接 / 推回 GitHub |
+| 浏览 | `list` / `search` / `info` | 列 / 搜 / 看详情 |
+| 部署 | `install` / `uninstall` / `link` / `unlink` | 建立与拆除符号链接 |
+| 创作 | `create` / `enhance` | 脚手架 / 用 Claude 增强 |
+| 本体 | `ontology …`（17 个子命令） | `load` `stats` `discover` `deps` `rdeps` `graph` `export` `validate` `lifecycle` `compose` `split` `version` `add-edge` `enrich` … |
+| 运行 | `agent` / `plugin` / `schedule` | 跑 agent / 做插件 / 个人日程 |
+| 运维 | `doctor` / `config` / `migrate` | 体检 / 配置 / 从 v0.2 迁移 |
+
+---
+
+## 5. 常见问题
+
+**Q：装完 `list` 是空的？**
+A：`init` 只建了空 tap，需要 `neoskills tap <url>` 或 `neoskills create` 才有内容。
+
+**Q：Windows 上跑测试一片红？**
+A：14 项 `test_linker.py` / `test_resolver.py` 用例要建符号链接。Windows 默认禁止普通用户建符号链接
+（需要管理员权限或开启"开发者模式"）。这是环境权限问题，不是代码坏了。
+
+**Q：中文描述变成了 `\u6F14\u793A`？**
+A：这是 0.4.2 的 bug——`write_frontmatter` 调 `yaml.dump` 时没开 `allow_unicode`。
+YAML 语义等价，但人读不了，做字符串匹配的 agent 也读不了。已在分支 `fix/frontmatter-unicode` 中修复。
+
+**Q：怎么判断一个技能写得够不够好？**
+A：neoskills 管"装"，不管"质量"。可以用配套的 `skilllens` 体检（20 条规则、0–100 分）：
+
+```bash
+python -m skilllens check ~/.neoskills/taps/mySkills/skills/my-skill
+```
+
+---
+
+## 6. 一句话总结
+
+`neoskills` 解决的是**分发与版本**，`skilllens` 解决的是**质量**。
+两个都做，技能才从"我电脑上能跑"变成"别人 clone 下来也能跑"。
+
+---
+
+*本指南基于 v0.4.2 实测（Python 3.13.14 / Windows）。命令与行为均逐条验证。*

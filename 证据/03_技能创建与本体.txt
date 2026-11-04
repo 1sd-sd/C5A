@@ -1,0 +1,54 @@
+# create 脚手架产物
+---
+name: demo-skill
+description: "\u6F14\u793A\uFF1A\u628A\u4F1A\u8BAE\u5F55\u97F3\u6574\u7406\u6210\u7EAA\
+  \u8981"
+author: ''
+tags:
+- first-party
+targets:
+- claude-code
+---
+
+# Demo Skill
+
+TODO: Add skill content here.
+
+
+# ontology.yaml
+# ontology.yaml — demo-skill
+# Run `neoskills ontology enrich demo-skill` to auto-populate.
+# Full template: src/neoskills/ontology/templates/ontology.yaml.template
+
+schema_version: '1.0'
+type: task
+domain:
+- general
+lifecycle:
+  state: candidate
+  maturity: created
+version: 0.1.0
+tags:
+- first-party
+
+# ontology load
+Ontology loaded: 1 skills, 1 edges, 31 domains
+
+By type:
+  task                 1
+
+By enrichment level:
+  L1                   1
+
+By namespace:
+  local                1
+
+Edge types:
+  belongs_to           1
+
+# doctor
+Taps: 1 registered (mySkills)
+Skills in mySkills: 1
+Links: 0 total, 0 healthy
+  Unlinked skills in mySkills: 1
+System is healthy.

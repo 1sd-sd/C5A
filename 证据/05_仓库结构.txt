@@ -1,0 +1,46 @@
+# 顶层结构
+CLAUDE.md
+Dockerfile
+LICENSE
+README.md
+TASKS.md
+agents
+commands
+docs
+main.py
+neoskills_v0_1.md
+neoskills_v0_2.md
+neoskills_v0_21.md
+neoskills_v0_3.md
+pyproject.toml
+skills
+src
+tests
+uv.lock
+
+# src 模块
+src/neoskills
+src/neoskills/adapters
+src/neoskills/cli
+src/neoskills/core
+src/neoskills/meta
+src/neoskills/ontology
+src/neoskills/plugin
+src/neoskills/runtime
+src/neoskills/translators
+
+# 各模块文件数
+src/neoskills/adapters/      6
+src/neoskills/cli/           18
+src/neoskills/core/          15
+src/neoskills/meta/          2
+src/neoskills/ontology/      13
+src/neoskills/plugin/        3
+src/neoskills/runtime/       3
+src/neoskills/translators/   1
+
+# 规模
+python 文件: 65
+src 行数: 7531
+测试用例: 172
+技能: 2
